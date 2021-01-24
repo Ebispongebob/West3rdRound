@@ -1,5 +1,6 @@
 package WestTwo2020.thirdRound;
 
+import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.annotation.JSONField;
 
 import java.util.Date;
@@ -47,30 +48,30 @@ public class countryCovidMessage {
     @JSONField(name = "lat")
     private double lat;
 
-    @JSONField(name = "long")
-    private double Long;
+    @JSONField(name = "aLong")
+    private double aLong;
 
     @JSONField(name = "updated")
-    private String  updated;
+    private Date updated;
 
 
-    public countryCovidMessage(int confirmed, int recovered, int deaths, String country, int population, int sq_km_area, double life_expectancy, int elevation_in_meters, String continent, String abbreviation, String location, int iso, String capital_city, double lat, double Long, String updated) {
-        this.confirmed = confirmed;
-        this.recovered = recovered;
-        this.deaths = deaths;
-        this.country = country;
-        this.population = population;
-        this.sq_km_area = sq_km_area;
-        this.life_expectancy = life_expectancy;
-        this.elevation_in_meters = elevation_in_meters;
-        this.continent = continent;
-        this.abbreviation = abbreviation;
-        this.location = location;
-        this.iso = iso;
-        this.capital_city = capital_city;
-        this.lat = lat;
-        this.Long = Long;
-        this.updated = updated;
+    public countryCovidMessage(JSONObject jsonObject) {
+        this.confirmed = jsonObject.getInteger("confirmed");
+        this.recovered = jsonObject.getInteger("recovered");
+        this.deaths = jsonObject.getInteger("deaths");
+        this.country = jsonObject.getString("country");
+        this.population = jsonObject.getInteger("population");
+        this.sq_km_area = jsonObject.getInteger("sq_km_area");
+        this.life_expectancy = jsonObject.getDouble("life_expectancy");
+        this.elevation_in_meters = jsonObject.getInteger("elevation_in_meters");
+        this.continent = jsonObject.getString("continent");
+        this.abbreviation = jsonObject.getString("abbreviation");
+        this.location = jsonObject.getString("location");
+        this.iso = jsonObject.getInteger("iso");
+        this.capital_city = jsonObject.getString("capital_city");
+//        this.lat = jsonObject.getDouble("lat");
+//        this.aLong = jsonObject.getDouble("long");
+//        this.updated = jsonObject.getDate("updated");
     }
 
 
@@ -131,11 +132,11 @@ public class countryCovidMessage {
         this.lat = lat;
     }
 
-    public void setLong(double aLong) {
-        Long = aLong;
+    public void setaLong(double aaLong) {
+        aLong = aaLong;
     }
 
-    public void setUpdated(String updated) {
+    public void setUpdated(Date updated) {
         this.updated = updated;
     }
 
@@ -196,11 +197,11 @@ public class countryCovidMessage {
         return lat;
     }
 
-    public double getLong() {
-        return Long;
+    public double getaLong() {
+        return aLong;
     }
 
-    public String getUpdated() {
+    public Date getUpdated() {
         return updated;
     }
 
@@ -221,7 +222,7 @@ public class countryCovidMessage {
                 ", iso=" + iso +
                 ", capital_city='" + capital_city + '\'' +
                 ", lat=" + lat +
-                ", Long=" + Long +
+                ", aLong=" + aLong +
                 ", updated=" + updated +
                 '}';
     }
