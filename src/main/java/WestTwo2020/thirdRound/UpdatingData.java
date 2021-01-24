@@ -14,7 +14,9 @@ public class UpdatingData {
 
     public static void main(String[] args) throws IOException, InterruptedException, SQLException {
 
-//        DBUtil.DeleteData();
+        //删除所有数据后重新insert所有数据进行更新
+        //删除数据
+        DBUtil.DeleteData();
 
         httpComponents USmes = new httpComponents();
         httpComponents Chinames = new httpComponents();
@@ -40,7 +42,7 @@ public class UpdatingData {
         JSONObject jsonObjectJP = JSON.parseObject(JapanMss);//全国数据
 
 //--------------------------------------------------------全国家疫情总数据导入------------------------------------------------------------------------------------//
-
+        
         //全国总数据的key是“All”
         JSONObject ALLOFUS = (JSONObject) jsonObjectUS.get("All");
         JSONObject ALLOFCN = (JSONObject) jsonObjectCN.get("All");
@@ -65,18 +67,21 @@ public class UpdatingData {
         UpdateData(jsonObjectUK);
         UpdateData(jsonObjectJP);
 
+        System.out.println("\033[32m" +"-----所有数据更新完成！-----");
     }
 
     //省份数据导入方法
     public static void UpdateData(JSONObject jsonObject) throws SQLException {
         List<String> jsonObjects = new ArrayList<>();
+        JSONObject all = (JSONObject) jsonObject.get("All");
+        String country = (String) all.get("country");
         for (String s : jsonObject.keySet()) {
             jsonObjects.add(s);
         }
         for (int i = 1; i < jsonObject.size(); i++) {
             JSONObject jo = (JSONObject) jsonObject.get(jsonObjects.get(i));
             provinceCovidMessage ccm = new provinceCovidMessage(jo);
-            DBUtil.ProvinceMesInsert(ccm);
+            DBUtil.ProvinceMesInsert(ccm,jsonObjects.get(i),country);
         }
     }
 }

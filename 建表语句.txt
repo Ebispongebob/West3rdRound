@@ -1,0 +1,29 @@
+表1：（全国）
+create table WorldCovidOfCountry (
+confirmed int,
+recovered int, 
+deaths int, 
+country char(20),
+population int, 
+sq_km_area int, 
+life_expectancy double, 
+elevation_in_meters int, 
+continent char(20),
+abbreviation char(20),
+location char(20),
+iso int, 
+capital_city char(20),
+lat double, 
+aLong double, 
+updated Date);
+
+表2：（各省份）
+create table WorldCovidOfProvince (
+id INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+city char(20),
+confirmed int,
+recovered int, 
+deaths int, 
+lat char(20),
+aLong char(20),
+updated Date);

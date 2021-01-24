@@ -1,9 +1,7 @@
 package WestTwo2020.thirdRound;
 
-
-import com.mysql.cj.xdevapi.DeleteStatement;
-
 import java.sql.*;
+import java.util.Scanner;
 
 public class DBUtil {
 
@@ -12,12 +10,11 @@ public class DBUtil {
     private static ResultSet resultSet = null;
     private static final CallableStatement callableStatement = null;
 
-    /*
-     * 封装Insert
-     */
-
+    //封装
     public static void CountryMesInsert(countryCovidMessage covidMessage) {
-        conn = DBconnection.conn();        //调用 DBconnection 类的 conn() 方法连接数据库
+
+        //调用 DBconnection 类的 conn() 方法连接数据库
+        conn = DBconnection.conn();
 
         String sql = "INSERT INTO  worldcovidofcountry (confirmed, recovered, deaths, country, population, sq_km_area, life_expectancy, elevation_in_meters, continent, abbreviation, location, iso, capital_city) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)";        //插入sql语句
         try {
@@ -44,7 +41,7 @@ public class DBUtil {
 
             preparedStatement.execute();//执行sql语句
 
-            System.out.println("各国数据更新成功");
+            System.out.println("国家数据更新成功");
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
@@ -52,9 +49,14 @@ public class DBUtil {
         }
     }
 
-    public static void ProvinceMesInsert(provinceCovidMessage provinceCovidMessage) {
-        conn = DBconnection.conn();        //调用 DBconnection 类的 conn() 方法连接数据库
-        String sql = "INSERT INTO worldcovidofprovince (confirmed, recovered, deaths, lat, aLong, updated) VALUES(?,?,?,?,?,?)";        //插入sql语句
+    public static void ProvinceMesInsert(provinceCovidMessage provinceCovidMessage, String city, String country) {
+
+        //调用 DBconnection 类的 conn() 方法连接数据库
+        conn = DBconnection.conn();
+
+        //插入sql语句
+        String sql = "INSERT INTO worldcovidofprovince (confirmed, recovered, deaths, lat, aLong, updated,city,country) VALUES(?,?,?,?,?,?,?,?)";
+
         try {
             preparedStatement = conn.prepareStatement(sql);
 
@@ -77,8 +79,11 @@ public class DBUtil {
                 preparedStatement.setDouble(5, provinceCovidMessage.getaLong());
             }
             preparedStatement.setDate(6, new java.sql.Date(provinceCovidMessage.getUpdated().getTime()));
+            preparedStatement.setString(7, city);
+            preparedStatement.setString(8, country);
 
-            preparedStatement.execute();//执行sql语句
+            //执行sql语句
+            preparedStatement.execute();
 
             System.out.println("数据更新成功");
         } catch (SQLException e) {
@@ -88,33 +93,30 @@ public class DBUtil {
         }
     }
 
-//    //更新数据库时清空数据库后填入新数据
-//    public static void DeleteData() throws SQLException {
-//        conn = DBconnection.conn();
-//        String delete1 = "delete from worldcovidofcountry";
-//        String delete2 = "delete from worldcovidofprovince";
-//        Statement statement = conn.createStatement();
-//        statement.execute(delete1);
-//        statement.execute(delete2);
-//        if (conn != null) {
-//            try {
-//                conn.close();
-//            } catch (SQLException e) {
-//                e.printStackTrace();
-//            }
-//        }
-//        if (statement != null) {
-//            try {
-//                statement.close();
-//            } catch (SQLException e) {
-//                e.printStackTrace();
-//            }
-//            //释放资源
-//        }
-//    }
+    //更新数据库时清空数据库后填入新数据
+    public static void DeleteData() throws SQLException {
+        conn = DBconnection.conn();
+        String delete1 = "delete from worldcovidofcountry";
+        String delete2 = "delete from worldcovidofprovince";
+        Statement statement = conn.createStatement();
+        statement.execute(delete1);
+        statement.execute(delete2);
 
-    public static void addCity(){
-
+        //释放资源
+        if (conn != null) {
+            try {
+                conn.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        if (statement != null) {
+            try {
+                statement.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
 }

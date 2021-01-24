@@ -23,6 +23,7 @@ public class provinceCovidMessage {
     @JSONField(name = "updated")
     private java.util.Date updated;
 
+    //全参构造方法
     public provinceCovidMessage(JSONObject jsonObject) {
         this.confirmed = jsonObject.getInteger("confirmed");
         this.recovered = jsonObject.getInteger("recovered");

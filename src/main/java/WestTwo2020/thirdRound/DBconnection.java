@@ -31,20 +31,10 @@ public class DBconnection {
         return conn;
     }
 
-    //执行sql语句
-    public static void exec(String sql) throws SQLException {
-        //获取数据库对象
-        statement = conn.createStatement();
-        //执行语句
-        statement.execute(sql);
-
-    }
-
-    //释放资源
+    //断开连接,释放资源
     public static void close() {
         if (conn != null) {
             try {
-                //断开连接
                 conn.close();
             } catch (SQLException e) {
                 e.printStackTrace();

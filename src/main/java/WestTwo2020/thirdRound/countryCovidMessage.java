@@ -54,7 +54,7 @@ public class countryCovidMessage {
     @JSONField(name = "updated")
     private Date updated;
 
-
+    //全参构造方法
     public countryCovidMessage(JSONObject jsonObject) {
         this.confirmed = jsonObject.getInteger("confirmed");
         this.recovered = jsonObject.getInteger("recovered");
@@ -128,18 +128,6 @@ public class countryCovidMessage {
         this.capital_city = capital_city;
     }
 
-    public void setLat(double lat) {
-        this.lat = lat;
-    }
-
-    public void setaLong(double aaLong) {
-        aLong = aaLong;
-    }
-
-    public void setUpdated(Date updated) {
-        this.updated = updated;
-    }
-
     //数据传入数据库时的数据（即全数据）
     public int getConfirmed() {
         return confirmed;
@@ -191,18 +179,6 @@ public class countryCovidMessage {
 
     public String getCapital_city() {
         return capital_city;
-    }
-
-    public double getLat() {
-        return lat;
-    }
-
-    public double getaLong() {
-        return aLong;
-    }
-
-    public Date getUpdated() {
-        return updated;
     }
 
     @Override

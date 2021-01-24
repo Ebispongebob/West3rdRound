@@ -15,10 +15,10 @@ public class httpComponents {
         HttpRequest httpRequest = HttpRequest.newBuilder(URI.create("https://covid-api.mmediagroup.fr/v1/cases" + condition)).build();
         HttpResponse.BodyHandler<String> responseBodyHandler = HttpResponse.BodyHandlers.ofString();
         HttpResponse<String> httpResponse = httpClient.send(httpRequest, responseBodyHandler);
-        body = httpResponse.body();
+        body = httpResponse.body();//获取的数据
 
     }
-
+    //getBody从外部获取数据
     public String getBody() {
         return body;
     }
