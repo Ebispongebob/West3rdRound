@@ -12,14 +12,10 @@ continent char(20),
 abbreviation char(20),
 location char(20),
 iso int, 
-capital_city char(20),
-lat double, 
-aLong double, 
-updated Date);
+capital_city char(20));
 
 表2：（各省份）
 create table WorldCovidOfProvince (
-id INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
 city char(20),
 confirmed int,
 recovered int, 

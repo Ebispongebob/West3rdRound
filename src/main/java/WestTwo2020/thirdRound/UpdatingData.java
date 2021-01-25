@@ -42,7 +42,7 @@ public class UpdatingData {
         JSONObject jsonObjectJP = JSON.parseObject(JapanMss);//全国数据
 
 //--------------------------------------------------------全国家疫情总数据导入------------------------------------------------------------------------------------//
-        
+
         //全国总数据的key是“All”
         JSONObject ALLOFUS = (JSONObject) jsonObjectUS.get("All");
         JSONObject ALLOFCN = (JSONObject) jsonObjectCN.get("All");
